@@ -20,6 +20,7 @@ function shop(){
         text("Item number: "+z,windowWidth*2/5,windowHeight*1/5+50*z)
         pop()
         btn_Shop[z].show()
+
  
     }
     volverBtn.show()

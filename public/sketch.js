@@ -43,7 +43,6 @@ function setup() {
   createCanvas(windowWidth,windowHeight); 
   fundo=createGraphics(windowWidth,windowHeight);//tiene que ser definido dentro de una funcion de p5.js porque fuera no es reconocida
 
-  
 }// porfavor no tocar este parentesis// nao mexer com a chave ******
 
 
@@ -242,27 +241,22 @@ function listar_Disenhos(){
       lista_Dibujos=respostaServidor
       ;
     }
-
-    // for(let i=0;i<respostaServidor.length;i++){
-    //   lista_Dibujos[i]=JSON.parse(respostaServidor[i].array_Design)
-    // }
   loop();
   });
 }
-function dibujar_BD(Array_dibujo_recibido){ //Arreglar
+function dibujar_BD(Array_dibujo_recibido){ //Arreglado
   for(let i=0; i<Array_dibujo_recibido.length;i++){
 
     if(Array_dibujo_recibido[i].fig_num==0){
-      dibujo.push(new Elipse(Array_dibujo_recibido[i].pointX,Array_dibujo_recibido[i].pointY,Array_dibujo_recibido[i].ancho,Array_dibujo_recibido[i].largo,Array_dibujo_recibido[i].color))
-      actualizarIndice(dibujo)
+      dibujo.push(new Elipse(Array_dibujo_recibido[i].pointX,Array_dibujo_recibido[i].pointY,Array_dibujo_recibido[i].ancho,Array_dibujo_recibido[i].largo,Array_dibujo_recibido[i].color, Array_dibujo_recibido[i].w_width, Array_dibujo_recibido[i].w_height))
   }
   if(Array_dibujo_recibido[i].fig_num==2){
-      dibujo.push(new Triangulo(Array_dibujo_recibido[i].pointX,Array_dibujo_recibido[i].pointY,Array_dibujo_recibido[i].base,Array_dibujo_recibido[i].altura,Array_dibujo_recibido[i].color))
-      actualizarIndice(dibujo)
+      dibujo.push(new Triangulo(Array_dibujo_recibido[i].pointX,Array_dibujo_recibido[i].pointY,Array_dibujo_recibido[i].base,Array_dibujo_recibido[i].altura,Array_dibujo_recibido[i].color,Array_dibujo_recibido[i].w_width, Array_dibujo_recibido[i].w_height))
   }
   if(Array_dibujo_recibido[i].fig_num==1){
-      dibujo.push(new Rectangulo(Array_dibujo_recibido[i].pointX,Array_dibujo_recibido[i].pointY,Array_dibujo_recibido[i].ancho,Array_dibujo_recibido[i].largo,Array_dibujo_recibido[i].color))
-      actualizarIndice(dibujo)
+      dibujo.push(new Rectangulo(Array_dibujo_recibido[i].pointX,Array_dibujo_recibido[i].pointY,Array_dibujo_recibido[i].ancho,Array_dibujo_recibido[i].largo,Array_dibujo_recibido[i].color, Array_dibujo_recibido[i].w_width, Array_dibujo_recibido[i].w_height))
   }
   }
+  actualizarIndice(dibujo)
+  responsibidade(dibujo,windowWidth, windowHeight)
 }

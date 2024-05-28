@@ -25,7 +25,9 @@ function studio() { //para colocar en la funcion draw()
     strokeWeight(5);
     rect(windowWidth - (3 * windowWidth) / 5-13,0, (3 * windowWidth)/5+13, windowHeight-windowHeight/5+12,50,0,0,50);
     pop()
-
+    if(dibujo.length>0){ // responsibidade del dibujo
+      responsibidade(dibujo, windowWidth, windowHeight)
+    }
 //--------------------------------------------------------MOstrando botones--------------------------------------------
 for(let i=0; i<interface.length;i++){
   interface[i].show()
@@ -209,15 +211,16 @@ for(let i=0; i<interface.length;i++){
   function dibujar(fig_Actual){//para cada una de las figuras
     //segun la variable que almazena la figura actual
     if(fig_Actual==0){
-        dibujo.push(new Elipse(mouseX,mouseY,tamanhoX,tamanhoY,colorPicker.color().levels)) //hay que cambiar el objeto colorPicker, pasar este parametro solo a los valores de colores
+        dibujo.push(new Elipse(mouseX,mouseY,tamanhoX,tamanhoY,colorPicker.color().levels, windowWidth, windowHeight)) //hay que cambiar el objeto colorPicker, pasar este parametro solo a los valores de colores
         actualizarIndice(dibujo)
     }
     if(fig_Actual==1){
-        dibujo.push(new Triangulo(mouseX,mouseY,tamanhoX,tamanhoY,colorPicker.color().levels))
+        dibujo.push(new Triangulo(mouseX,mouseY,tamanhoX,tamanhoY,colorPicker.color().levels,windowWidth, windowHeight))
         actualizarIndice(dibujo)
+
     }
     if(fig_Actual==2){
-        dibujo.push(new Rectangulo(mouseX,mouseY,tamanhoX,tamanhoY,colorPicker.color().levels))
+        dibujo.push(new Rectangulo(mouseX,mouseY,tamanhoX,tamanhoY,colorPicker.color().levels,windowWidth, windowHeight))
         actualizarIndice(dibujo)
     }
 
@@ -238,7 +241,7 @@ for(let i=0; i<interface.length;i++){
 }
 
   class Elipse{
-    constructor(pointX, pointY, ancho, largo, colorPicker){
+    constructor(pointX, pointY, ancho, largo, colorPicker, w_width, w_height){
       this.fig_num=0;
       this.indiceArray;
       this.pointX=pointX;
@@ -246,6 +249,8 @@ for(let i=0; i<interface.length;i++){
       this.ancho=ancho;
       this.largo=largo;
       this.color=colorPicker
+      this.w_width=w_width
+      this.w_height=w_height
 
     }  
     
@@ -275,7 +280,7 @@ for(let i=0; i<interface.length;i++){
   }
   
   class Rectangulo{
-    constructor(pointX, pointY, ancho, largo,colorPicker){
+    constructor(pointX, pointY, ancho, largo,colorPicker,w_width, w_height){
       this.fig_num=1;
       this.indiceArray;
       this.pointX=pointX;
@@ -284,6 +289,9 @@ for(let i=0; i<interface.length;i++){
       this.largo=largo;
       //para la funcion show()
       this.color=colorPicker
+      this.w_width=w_width
+      this.w_height=w_height
+
     }  
     
   //ahora los metodos:
@@ -307,7 +315,7 @@ for(let i=0; i<interface.length;i++){
   }
   
   class Triangulo{
-    constructor(pointX, pointY, base, altura,colorPicker){
+    constructor(pointX, pointY, base, altura,colorPicker,w_width, w_height){
       this.fig_num=2;
       this.indiceArray;
       this.pointX=pointX;
@@ -322,6 +330,8 @@ for(let i=0; i<interface.length;i++){
       this.y2 = this.pointY + this.altura / 2;
       this.x3 = this.pointX;
       this.y3 = this.pointY - this.altura / 2;
+      this.w_width=w_width
+      this.w_height=w_height
     
     }  
     
@@ -356,3 +366,17 @@ for(let i=0; i<interface.length;i++){
     }
   }
 
+// esta funcion va a ir a cada objeto del array dibujo y va a verificar si los valores 
+// w_width e w_height son los mismos que los windowWidth e WindowHeight de la pantalla actual
+// caso sean diferentes va a actualizar las posiciones y despues modificara w_width e w_height
+// Deberia ser puesta en draw().??
+  function responsibidade(array,windowWidth,windowHeight){ 
+   if(array[0].w_width!=windowWidth || array[0].w_height!= windowHeight){
+      for(let i=0; i<array.length;i++){
+        array[i].pointX=(array[i].pointX*windowWidth)/array[i].w_width
+        array[i].pointY=(array[i].pointY*windowHeight)/array[i].w_height
+        array[i].w_width=windowWidth
+        array[i].w_height=windowHeight
+      }
+    }
+  }
