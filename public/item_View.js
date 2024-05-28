@@ -1,6 +1,9 @@
+
 let like;
 let buy;
 let back_shop;
+
+
 function item_View() { //para colocar en la funcion draw()
     background(0,0);
     push()
@@ -14,18 +17,7 @@ function item_View() { //para colocar en la funcion draw()
     back_shop.show()
 //--------------------------------------------------------MOstrando botones--------------------------------------------
 
-        push() //fondo para que la animacion no obstruya la lectura del text()
-        fill(255,0,0)
 
-        rect(windowWidth*2.4/15,windowHeight/2.6 +342,200,32)//others options
-
-        pop()
-
-        
-        push()
-        textSize(25)
-        text("Others Options:! ",windowWidth*2.4/15,windowHeight/2.6 +350)
-        pop()
 
 
 
@@ -37,6 +29,15 @@ function item_View() { //para colocar en la funcion draw()
         // Posición de la tarjeta centrada en relación con el texto
         let cardX = windowWidth * 2.4 / 15;
         let cardY = windowHeight / 2.6  + 40; // 40 para separar la tarjeta del texto
+                // Información del diseño (sustituir con tus datos)
+
+        let designName = lista_Inventario[dibujo_AMostrar].design_Name;
+        //let creator = lista_Inventario[dibujo_AMostrar].id_Creator;
+        let creator =tarjeta.name   // da problemas unas veces sino usar la linea de arriba
+        // tarjeta almazena la informacion del creador del item que esta a ser mostrado en itemView()
+        let price = lista_Inventario[dibujo_AMostrar].price;
+        let likes = lista_Inventario[dibujo_AMostrar].likes;
+        let sold = lista_Inventario[dibujo_AMostrar].vendidos;
     
         push();
         rectMode(CENTER);
@@ -45,12 +46,7 @@ function item_View() { //para colocar en la funcion draw()
         strokeWeight(5);
         rect(cardX, cardY, windowWidth * cardWidthFraction, windowHeight * cardHeightFraction, 10);
         
-        // Información del diseño (sustituir con tus datos)
-        let designName = "Nombre del Diseño";
-        let creator = "Nombre del Creador";
-        let price = "$100";
-        let likes = 10;
-        let sold = 5;
+
     
         // Mostrar la información en la tarjeta
         textAlign(LEFT, TOP);
@@ -71,6 +67,7 @@ function item_View() { //para colocar en la funcion draw()
         if(dibujo.length>0){ // responsibidade del dibujo
             responsibidade(dibujo, windowWidth, windowHeight)
           }
+          loop()
 
 }//final de item_View() para la funcion draw()
 

@@ -1,3 +1,4 @@
+
 let lista_Inventario=[]
 let btn_Shop=[]
 
@@ -16,7 +17,6 @@ function shop(){
     for(let z=0;z<lista_Inventario.length;z++){
         push()
         fill(255)
-        //text(lista_Dibujos[z].design_Name,windowWidth*2/5,windowHeight*1/5+50*z)
         text("Item number: "+z,windowWidth*2/5,windowHeight*1/5+50*z)
         pop()
         btn_Shop[z].show()
@@ -37,6 +37,17 @@ function eventos_shop(){
             dib_recibido=JSON.parse(lista_Inventario[dibujo_AMostrar].array_Design)//este esta bien
             dibujar_BD(dib_recibido);
             screen=8;
+
+        //ahora la query para la informacion de la tarjeta de informacion.
+        loadJSON('/getTarjeta/'+lista_Inventario[dibujo_AMostrar].id_Creator,(respostaServidor)=>{
+            console.log("Respuesta del servidor para encontrar informacion del artista:")
+            if(respostaServidor.length>0){
+                console.log(tarjeta)
+              tarjeta=respostaServidor[0]//problema de sincronia??? hay veces que no sale a la primera
+              ;
+            }
+          });
+          loop()
         }
 
         }

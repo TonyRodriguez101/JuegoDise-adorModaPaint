@@ -1,3 +1,4 @@
+let info_Statistics=[];
 function mainScreen() {       //old main screen
 for(let z=0; z<buttons.length;z++){
    buttons[z].show();
@@ -33,6 +34,14 @@ if(buttons[1].es_Clickeado(mouseX,mouseY)){
 if(buttons[2].es_Clickeado(mouseX,mouseY)){
   screen=9;//statistics()
   def_Statistics();
+  //ahora tenemos que hacer el request de informacion para las tablas:
+  loadJSON('/getStatisticsShop/'+usuario_Actual.id,(respostaServidor)=>{
+    console.log("Respuesta del servidor para encontrar informacion del artista:")
+    if(respostaServidor.length>0){
+      info_Statistics=respostaServidor
+      ;
+    }
+  });
 
   loop();
 }

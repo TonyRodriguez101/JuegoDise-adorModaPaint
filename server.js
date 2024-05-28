@@ -154,6 +154,7 @@ let something=req.params[0]//antes no funcionaba sin el req daba error.
     console.log(result)
   });    });
 
+  // para los eventos de la shop---------------
 //para el udpate cuando se hace un like
 app.post('/likeDesign', (req, res) => {
   const designId = req.body.designId;
@@ -240,6 +241,37 @@ app.post('/buyDesign', (req, res) => {
   });
 });
 
+//para la tarjeta de informacion del diseño de la shop
+app.get('/getTarjeta/:id_User',(req,res)=>{
+
+  let id = req.params.id_User;
+
+  let sql = "SELECT * FROM user WHERE id = ' "+id+"';" 
+
+    dbase.query(sql, (err,result)=>{
+    if(err) throw err; 
+    res.send(result);
+      console.log(result)
+    });    });
+
+// -------- End eventos Shop------
+
+//-------Requests para Statistics--------
+//para la tarjeta de informacion del diseño de la shop
+app.get('/getStatisticsShop/:id',(req,res)=>{
+
+  let id = req.params.id;
+
+  let sql = "SELECT * FROM shop WHERE id_Creator = ' "+id+"';" 
+
+    dbase.query(sql, (err,result)=>{
+    if(err) throw err; 
+    res.send(result);
+      console.log(result)
+    });    });
+
+
+//-------End requests Statistics----------
       
 
 app.listen(port, () => {

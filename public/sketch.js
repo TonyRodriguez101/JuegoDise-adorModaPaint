@@ -28,6 +28,8 @@ let dibujo_AMostrar=0;
 //temporales: 
 let colorRestaurado
 
+let tarjeta=[];
+
 function preload() {
   logLogo = loadImage("logoOrig.png")
 }
@@ -64,6 +66,7 @@ if(screen==5){eventos_lobby()}
 if(screen==6){eventos_interface()}
 if(screen==7){eventos_shop()}
 if(screen==8){eventos_itemView()}
+if(screen==9){eventos_Statistics()}
 
 //---------------------)------------------------------------End of Click On Buttons--------------------------------------------------------------------------------------
 
