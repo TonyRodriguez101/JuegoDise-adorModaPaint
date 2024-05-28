@@ -12,3 +12,11 @@ function startScreen() {
 
 }
 
+function eventos_startScreen(){
+  if(loginMenu_btn.es_Clickeado(mouseX,mouseY)){
+    screen=1;
+  }
+  if(registerMenu_btn.es_Clickeado(mouseX,mouseY)){
+    screen=2;
+  }
+}

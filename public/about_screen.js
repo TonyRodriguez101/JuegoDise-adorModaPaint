@@ -41,3 +41,9 @@ function infoAbout(){
     "Share your design with other players."
   ]; 
  }
+
+ function eventos_about(){
+  if(backAbout.es_Clickeado(mouseX,mouseY)){
+    screen=3;
+  }
+ }

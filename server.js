@@ -154,6 +154,91 @@ let something=req.params[0]//antes no funcionaba sin el req daba error.
     console.log(result)
   });    });
 
+//para el udpate cuando se hace un like
+app.post('/likeDesign', (req, res) => {
+  const designId = req.body.designId;
+  const sql = "UPDATE shop SET likes = likes + 1 WHERE id_Venta = ?";
+  
+  dbase.query(sql, [designId], (err, result) => {
+      if (err) {
+          console.error('Error al dar like:', err);
+          res.status(500).send({ ack: 0, error: 'Error interno del servidor' });
+          return;
+      }
+
+      res.send({ ack: 1, message: 'Like dado exitosamente' });
+      console.log('Like dado exitosamente');
+  });
+});
+
+ //para comprar un diseño
+
+app.post('/buyDesign', (req, res) => {
+  const designId = req.body.designId;
+  const price = req.body.price;
+  const userId = req.body.userId;
+  const dibujo_comprado=req.body.dibujo;
+  const id_creador =req.body.id_creador;
+
+  
+  // Verifica si el usuario tiene suficiente dinero
+  let sql = "SELECT Money FROM User WHERE id = ?";
+  dbase.query(sql, [userId], (err, result) => {
+      if (err) {
+          console.error('Error al verificar el dinero del usuario:', err);
+          res.status(500).send({ ack: 0, error: 'Error interno del servidor' });
+          return;
+      }
+
+      const userMoney = result[0].Money;
+
+      if (userMoney >= price) {
+        // Realiza la compra y actualiza el dinero del usuario
+        let updateSql = "UPDATE User SET Money = Money - ? WHERE id = ?";
+        dbase.query(updateSql, [price, userId], (updateErr, updateResult) => {
+            if (updateErr) {
+                console.error('Error al actualizar el dinero del usuario:', updateErr);
+                res.status(500).send({ ack: 0, error: 'Error interno del servidor' });
+                return;
+            }
+        //Sumarle al vendedor el dinero:
+        let updateSql2 = "UPDATE User SET Money = Money + ? WHERE id = ?";
+        dbase.query(updateSql2, [price, id_creador], (updateErr, updateResult) => {
+            if (updateErr) {
+                console.error('Error al actualizar el dinero del vendedor:', updateErr);
+                res.status(500).send({ ack: 0, error: 'Error interno del servidor' });
+                return;
+            }
+        // Agrega el diseño comprado a la tabla Studio
+        let insertSql = "INSERT INTO Studio (design_Name, id_User, array_Dibujo) VALUES (?, ?, ?)";
+        dbase.query(insertSql, [designId, userId, dibujo_comprado], (insertErr, insertResult) => {
+            if (insertErr) {
+                console.error('Error al agregar el diseño comprado a Studio:', insertErr);
+                res.status(500).send({ ack: 0, error: 'Error interno del servidor' });
+                return;
+            }
+          // Hacerle update a la tabla shop para actualizar el numero de vendidos del item:
+          let updateSql3 = "UPDATE shop SET vendidos = vendidos + 1 WHERE id_Venta = ?";
+          dbase.query(updateSql3, [ designId], (updateErr, updateResult) => {
+              if (updateErr) {
+                  console.error('Error al actualizar el numero de unidades vendidas:', updateErr);
+                  res.status(500).send({ ack: 0, error: 'Error interno del servidor' });
+                  return;
+              }
+                res.send({ ack: 1, message: 'Compra exitosa' });
+                console.log('Compra exitosa');
+            });
+          });
+        });
+        });
+
+
+      } else {
+          res.send({ ack: 0, error: 'Dinero insuficiente para realizar la compra' });
+          console.log('Dinero insuficiente para realizar la compra');
+      }
+  });
+});
 
       
 

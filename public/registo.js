@@ -61,3 +61,31 @@ function def_RegisterLogin(){
   btnLogin= new createbuttons(windowWidth * 0.5+100, windowHeight * 0.5 + 150,120,50,30, "Login")
 }
 
+function eventos_registro(){
+  if(volverBtn.es_Clickeado(mouseX,mouseY)){
+    screen=0;
+    nameInput.remove()
+    passInput.remove()
+    loop()
+  }
+
+  if(registrarBtn.es_Clickeado(mouseX,mouseY)){
+    let name = nameInput.value();
+    let pass = passInput.value();
+  
+    let user = {
+      "name": name,
+      "password": pass
+     }
+  
+    httpPost('/register',user,'json',(respostaServidor)=>{
+      if(respostaServidor.length>0){
+        console.log("FUE REGISTRADO")
+        screen=1;
+      }else{
+        console.log("NO FUE REGISTRADO")
+      }
+    })
+
+  }
+}
