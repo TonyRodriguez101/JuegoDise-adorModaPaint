@@ -15,6 +15,9 @@ function item_View() { //para colocar en la funcion draw()
     like.show()
     buy.show()
     back_shop.show()
+    switch_Materiales.show()
+
+
 //--------------------------------------------------------MOstrando botones--------------------------------------------
 
 
@@ -24,7 +27,7 @@ function item_View() { //para colocar en la funcion draw()
         //----------------------Tarjeta de informacion------------------
 
         let cardWidthFraction = 0.3;
-        let cardHeightFraction = 0.5;
+        let cardHeightFraction = 0.2;
     
         // Posición de la tarjeta centrada en relación con el texto
         let cardX = windowWidth * 2.4 / 15;
@@ -53,7 +56,7 @@ function item_View() { //para colocar en la funcion draw()
         textSize(18);
         fill(0);
         noStroke();
-        text(`Nombre del Diseño: ${designName}\nCreador: ${creator}\nPrecio: ${price}\nLikes: ${likes}\nVendidos: ${sold}`, cardX - (windowWidth * cardWidthFraction) / 2 + 20, cardY - (windowHeight * cardHeightFraction) / 2 + 20);
+        text(`Design Name: ${designName}\nCreator: ${creator}\nPrice: ${price} €\nLikes: ${likes}\nSelled: ${sold}`, cardX - (windowWidth * cardWidthFraction) / 2 + 20, cardY - (windowHeight * cardHeightFraction) / 2 + 20);
     
         pop();
         //----------------------End tarjeta de  informacion-------------
@@ -69,6 +72,8 @@ function item_View() { //para colocar en la funcion draw()
           }
           loop()
 
+          materiales()
+
 }//final de item_View() para la funcion draw()
 
 function def_Item_View(){
@@ -79,6 +84,9 @@ function def_Item_View(){
 }
 
 function eventos_itemView(){
+    if(switch_Materiales.es_Clickeado(mouseX, mouseY)){//activar/desactivar modelo sugerido del creador
+        modelos=!modelos
+    }
     if(back_shop.es_Clickeado(mouseX,mouseY)){
         dibujo=[]//vaziarlo para poder carregar os outros lembrar que objetos sao adicionados com um .push()
         screen=7

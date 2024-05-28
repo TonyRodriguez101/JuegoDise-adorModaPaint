@@ -20,22 +20,23 @@ function shop(){
         text("Item number: "+z,windowWidth*2/5,windowHeight*1/5+50*z)
         pop()
         btn_Shop[z].show()
-
  
     }
     volverBtn.show()
     loop()
 }
 function eventos_shop(){
-    if(volverBtn.es_Clickeado(mouseX,mouseY)){
+    if(volverBtn.es_Clickeado(mouseX,mouseY)){//back
         screen=3;
         dibujo=[]
     }
+
     for(let i=0;i<btn_Shop.length;i++){
         if(btn_Shop[i].es_Clickeado(mouseX, mouseY)){
             dibujo_AMostrar=i;
             dib_recibido=JSON.parse(lista_Inventario[dibujo_AMostrar].array_Design)//este esta bien
             dibujar_BD(dib_recibido);
+            modelo_Actual=lista_Inventario[dibujo_AMostrar].modelo
             screen=8;
 
         //ahora la query para la informacion de la tarjeta de informacion.

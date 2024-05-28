@@ -23,6 +23,7 @@ function eventos_mainMenu(){
     //cambiar las dimensiones:
     width_Slider=createSlider(5, 220, 20, 5)
     height_Slider=createSlider(5, 220, 20, 5)
+    slider_Materiales=createSlider(0,4)
     loop()
   }
 if(buttons[1].es_Clickeado(mouseX,mouseY)){

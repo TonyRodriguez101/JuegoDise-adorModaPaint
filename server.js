@@ -121,7 +121,8 @@ app.post('/sell',(req,res)=>{
   let nombre_Design=req.body.nome_Disenho
   let id_Creator=req.body.id_Creator
   let array_Disenho=req.body.array_Disenho
-  let price=300
+  let price=req.body.price
+  let modelo=req.body.modelo
 
 //Verifica se o disenho já existe
   let sql = "SELECT * from shop WHERE id_Design ='"+id_Design+"';"
@@ -133,8 +134,8 @@ app.post('/sell',(req,res)=>{
       res.send({"ack":0})    
     }else{
 //se não existe cria novo item em shop
-      let values = [id_Design, nombre_Design,id_Creator,array_Disenho,price];
-      let sql2 = "INSERT INTO shop (id_Design, design_Name,id_Creator,array_Design,price) VALUES (?, ?, ?, ?, ? )";
+      let values = [id_Design, nombre_Design,id_Creator,array_Disenho,price, modelo];
+      let sql2 = "INSERT INTO shop (id_Design, design_Name,id_Creator,array_Design,price,modelo) VALUES (?, ?, ?, ?, ?, ? )";
       dbase.query(sql2, values, (err,result)=>{
         if(err) throw err;
           res.send(result);

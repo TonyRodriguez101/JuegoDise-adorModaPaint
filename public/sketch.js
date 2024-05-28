@@ -1,5 +1,5 @@
 let screen = 0; //ecra
-let logLogo;//imagens
+let logLogo, camisa, camisaCorta,pantalon,saya,short;//imagens
 //variables para Animacion del fondo
 let fundo;
 let figuras=[];
@@ -32,6 +32,11 @@ let tarjeta=[];
 
 function preload() {
   logLogo = loadImage("logoOrig.png")
+  camisa = loadImage("camisa.png")
+  camisaCorta = loadImage("camisaCorta.png")
+  pantalon = loadImage("pantalon.png")
+  saya = loadImage("saya.png")
+  short= loadImage("short.png")
 }
 
 function setup() {
