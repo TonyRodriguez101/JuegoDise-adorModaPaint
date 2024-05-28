@@ -117,7 +117,7 @@ const dbase = mysql.createConnection({
   
 
 app.post('/sell',(req,res)=>{
-  let id_Design =req.body.id_Disenho
+  let id_Design =req.body.id_Disenho // esto esta dando el problema en la shop porque no puede ser el id del diseño de cada jugador.
   let nombre_Design=req.body.nome_Disenho
   let id_Creator=req.body.id_Creator
   let array_Disenho=req.body.array_Disenho

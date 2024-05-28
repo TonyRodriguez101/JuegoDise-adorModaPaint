@@ -39,23 +39,18 @@ function setup() {
   def_RegisterLogin();
   def_About();
   def_Studio();
-  
-
-
+ 
   createCanvas(windowWidth,windowHeight); 
   fundo=createGraphics(windowWidth,windowHeight);//tiene que ser definido dentro de una funcion de p5.js porque fuera no es reconocida
 
   
 }// porfavor no tocar este parentesis// nao mexer com a chave ******
 
-//Aqui voy a poner las variables para los movimientos de las figuras.
-
 
 function draw() { //aqui solo colocar cosas para que se repitan, no poner menu de botones input .remove porque se come la memoria?
   draw_Fundo()
   changeScreen()
 }
-
 
 function mousePressed() {
 //---------------------------------------------------------Click On Buttons--------------------------------------------------------------------------------------
@@ -207,14 +202,12 @@ if(screen==6){
 if(screen==7){
   eventos_shop()
 }
+if(screen==8){item_View()}
 
 //---------------------------------------------------------End of Click On Buttons--------------------------------------------------------------------------------------
 
 }//termina mousePressed()
   
-
-
-
 //Controladores de  Pantallas
 function changeScreen(){
   if(screen==0){
@@ -242,8 +235,6 @@ function changeScreen(){
   if(screen==8){item_View()}
 }
 
-
-
 function listar_Disenhos(){
   loadJSON('/getDibujos/'+usuario_Actual.id,(respostaServidor)=>{
     console.log("Respuesta del servidor a Listar Diseños debe de enviar un array con los diseños:")
@@ -258,20 +249,19 @@ function listar_Disenhos(){
   loop();
   });
 }
-function dibujar_BD(Array_dibujo_recibido){
+function dibujar_BD(Array_dibujo_recibido){ //Arreglar
   for(let i=0; i<Array_dibujo_recibido.length;i++){
-    colorRestaurado=Array_dibujo_recibido[i].color.levels;
 
     if(Array_dibujo_recibido[i].fig_num==0){
-      dibujo.push(new Elipse(Array_dibujo_recibido[i].pointX,Array_dibujo_recibido[i].pointY,Array_dibujo_recibido[i].ancho,Array_dibujo_recibido[i].largo,colorRestaurado))
+      dibujo.push(new Elipse(Array_dibujo_recibido[i].pointX,Array_dibujo_recibido[i].pointY,Array_dibujo_recibido[i].ancho,Array_dibujo_recibido[i].largo,Array_dibujo_recibido[i].color))
       actualizarIndice(dibujo)
   }
   if(Array_dibujo_recibido[i].fig_num==2){
-      dibujo.push(new Triangulo(Array_dibujo_recibido[i].pointX,Array_dibujo_recibido[i].pointY,Array_dibujo_recibido[i].base,Array_dibujo_recibido[i].altura,colorRestaurado))
+      dibujo.push(new Triangulo(Array_dibujo_recibido[i].pointX,Array_dibujo_recibido[i].pointY,Array_dibujo_recibido[i].base,Array_dibujo_recibido[i].altura,Array_dibujo_recibido[i].color))
       actualizarIndice(dibujo)
   }
   if(Array_dibujo_recibido[i].fig_num==1){
-      dibujo.push(new Rectangulo(Array_dibujo_recibido[i].pointX,Array_dibujo_recibido[i].pointY,Array_dibujo_recibido[i].ancho,Array_dibujo_recibido[i].largo,colorRestaurado))
+      dibujo.push(new Rectangulo(Array_dibujo_recibido[i].pointX,Array_dibujo_recibido[i].pointY,Array_dibujo_recibido[i].ancho,Array_dibujo_recibido[i].largo,Array_dibujo_recibido[i].color))
       actualizarIndice(dibujo)
   }
   }

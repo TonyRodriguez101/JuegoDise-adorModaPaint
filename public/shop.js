@@ -34,7 +34,7 @@ function eventos_shop(){
         if(btn_Shop[i].es_Clickeado(mouseX, mouseY)){
             dibujo_AMostrar=i;
             dib_recibido=JSON.parse(lista_Inventario[dibujo_AMostrar].array_Design)//este esta bien
-            dibujar_BD(dib_recibido);//aqui hay problema de sincronia demaciado hardcore. //no carga bien la parte de guardar el color del objeto colorPicker
+            dibujar_BD(dib_recibido);
             screen=8;
         }
 

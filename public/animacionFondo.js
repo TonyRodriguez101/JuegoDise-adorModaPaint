@@ -16,11 +16,6 @@ function def_Fundo(){
 
 }
 
-
- 
-
-
-
 //Funciones:
 function draw_Fundo(){
 

@@ -209,15 +209,15 @@ for(let i=0; i<interface.length;i++){
   function dibujar(fig_Actual){//para cada una de las figuras
     //segun la variable que almazena la figura actual
     if(fig_Actual==0){
-        dibujo.push(new Elipse(mouseX,mouseY,tamanhoX,tamanhoY,colorPicker.color()))
+        dibujo.push(new Elipse(mouseX,mouseY,tamanhoX,tamanhoY,colorPicker.color().levels)) //hay que cambiar el objeto colorPicker, pasar este parametro solo a los valores de colores
         actualizarIndice(dibujo)
     }
     if(fig_Actual==1){
-        dibujo.push(new Triangulo(mouseX,mouseY,tamanhoX,tamanhoY,colorPicker.color()))
+        dibujo.push(new Triangulo(mouseX,mouseY,tamanhoX,tamanhoY,colorPicker.color().levels))
         actualizarIndice(dibujo)
     }
     if(fig_Actual==2){
-        dibujo.push(new Rectangulo(mouseX,mouseY,tamanhoX,tamanhoY,colorPicker.color()))
+        dibujo.push(new Rectangulo(mouseX,mouseY,tamanhoX,tamanhoY,colorPicker.color().levels))
         actualizarIndice(dibujo)
     }
 
